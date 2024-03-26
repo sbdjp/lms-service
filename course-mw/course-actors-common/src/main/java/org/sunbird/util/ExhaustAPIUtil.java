@@ -24,6 +24,9 @@ import java.util.Map;
 
 public class ExhaustAPIUtil {
 
+private ExhaustAPIUtil() {
+}
+
   private static LoggerUtil logger = new LoggerUtil(ExhaustAPIUtil.class);
   private static ObjectMapper mapper = new ObjectMapper();
   private static String exhaustAPISubmitURL = null;
