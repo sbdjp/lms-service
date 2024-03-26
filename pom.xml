@@ -16,14 +16,13 @@
 <project>
   <properties>
     <!-- SonarCloud configuration -->
-    <sonar.organization>${{ secrets.organization }}</sonar.organization>
-    <sonar.projectKey>${{ secrets.projectKey }}</sonar.projectKey>
+    <sonar.organization>${env.SONARCLOUD_ORGANIZATION}</sonar.organization>
+    <sonar.projectKey>${env.SONARCLOUD_PROJECT_KEY}</sonar.projectKey>
     <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     <!-- SonarCloud authentication token -->
-    <sonar.login>${{ secrets.SONAR_TOKEN }}</sonar.login>
+    <sonar.login>${env.SONARCLOUD_TOKEN}</sonar.login>
   </properties>
-</project>
-  
+
   <build>
     <plugins>
       <plugin>
@@ -34,6 +33,7 @@
     </plugins>
   </build>
 </project>
+
   	
 
   <profiles>
