@@ -1,13 +1,18 @@
 name: Fix Sonar Issues with Pixeebot
+
 on:
-   push:
-     branches:
-      - test-1 
+  push:
+    branches:
+      - test-1
+
 jobs:
   build:
     runs-on: ubuntu-16.04
+    
     steps:
-    - uses: actions/checkout@v1
+    - name: Checkout code
+      uses: actions/checkout@v2
+
     - name: Set up JDK
       uses: actions/setup-java@v1
       with:
