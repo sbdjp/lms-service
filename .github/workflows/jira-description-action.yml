@@ -1,16 +1,18 @@
-name: jira-description-action
+name: Fix Sonar Issues with Pixeebot
 on:
-  pull_request_target:
-    types: [opened, labeled]
+  check_run:
+    types: [completed]
+
+permissions:
+  id-token: write
+
 jobs:
-  add-jira-description:
+  share:
+    name: Upload Sonar Results to Pixeebot
     runs-on: ubuntu-latest
+    if: ${{ github.event.check_run.name == 'SonarCloud Code Analysis' }}
     steps:
-      - uses: project-sunbird/jira-description-action@v0.4.0
-        name: jira-description-action
+      - uses: pixee/upload-tool-results-action@v1
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          jira-token: ${{ secrets.JIRA_TOKEN }}
-          jira-base-url: ${{ secrets.JIRA_BASE_URL }}
-          fail-when-jira-issue-not-found: ${{ secrets.FAIL_WHEN_JIRA_ISSUE_NOT_FOUND }}
-          use: both
+          tool: sonar
+          sonar-token: ${{ secrets.SONAR_TOKEN }}
