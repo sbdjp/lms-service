@@ -13,11 +13,6 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: '11'
-    - name: Analyze with SonarCloud
-      run: ./mvnw -B verify sonar:sonar -Dsonar.projectKey=${{ secrets.projectKey }} -Dsonar.organization=${{ secrets.organization }} -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }}
-      env:
-        GITHUB_TOKEN: ${{ secrets.GIT_HUB_TOKEN }}
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
     - uses: pixee/upload-tool-results-action@v1
       with:
