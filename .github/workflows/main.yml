@@ -1,19 +1,27 @@
-name: Fix Sonar Issues with Pixeebot
+name: SonarCloud
 on:
-  push:
-    branches:
-      - test-1
-
-permissions:
-  id-token: write
-
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: branch
 jobs:
-  share:
-    name: Upload Sonar Results to Pixeebot
-    runs-on: ubuntu-latest
-    if: ${{ github.event.check_run.name == 'SonarCloud Code Analysis' }}
+  build:
+    runs-on: ubuntu-16.04
     steps:
-      - uses: pixee/upload-tool-results-action@v1
-        with:
+    - uses: actions/checkout@v1
+    - name: Set up JDK
+      uses: actions/setup-java@v1
+      with:
+        java-version: '11'
+    - name: Analyze with SonarCloud
+      run: ./mvnw -B verify sonar:sonar -Dsonar.projectKey=${{ secrets.projectKey }} -Dsonar.organization=${{ secrets.organization }} -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GIT_HUB_TOKEN }}
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+    - uses: pixee/upload-tool-results-action@v1
+      with:
           tool: sonar
           sonar-token: ${{ secrets.SONAR_TOKEN }}
+          sonar-component-key: owner_repo
+          sonar-api-url: https://sonarcloud.io/api    
