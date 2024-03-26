@@ -184,7 +184,7 @@ public class EsSyncActor extends BaseActor {
         .forEach(
             entry -> {
               Object value = row.getObject(entry.getValue());
-              if (entry.getKey().equals("contentStatus") && value != null) {
+              if ("contentStatus".equals(entry.getKey()) && value != null) {
                 try {
                   rowMap.put(entry.getKey(), new ObjectMapper().writeValueAsString(value));
                 } catch (JsonProcessingException e) {

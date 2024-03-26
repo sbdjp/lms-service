@@ -770,7 +770,7 @@ public class PageManagementActor extends BaseActor {
     map.remove(JsonKey.CREATED_BY);
     map.remove(JsonKey.UPDATED_DATE);
     map.remove(JsonKey.UPDATED_BY);
-    if (from.equalsIgnoreCase("getPageData")) {
+    if ("getPageData".equalsIgnoreCase(from)) {
       map.remove(JsonKey.STATUS);
     }
   }
