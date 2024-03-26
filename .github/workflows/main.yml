@@ -5,22 +5,16 @@ on:
     branches:
       - test-1
 
+permissions:
+  id-token: write
+
 jobs:
-  build:
-    runs-on: ubuntu-16.04
-    
+  share:
+    name: Upload Sonar Results to Pixeebot
+    runs-on: ubuntu-latest
+    if: ${{ github.event.check_run.name == 'SonarCloud Code Analysis' }}
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
-    - name: Set up JDK
-      uses: actions/setup-java@v1
-      with:
-        java-version: '11'
-
-    - uses: pixee/upload-tool-results-action@v1
-      with:
+      - uses: pixee/upload-tool-results-action@v1
+        with:
           tool: sonar
           sonar-token: ${{ secrets.SONAR_TOKEN }}
-          sonar-component-key: owner_repo
-          sonar-api-url: https://sonarcloud.io/api    
