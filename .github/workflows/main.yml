@@ -1,9 +1,8 @@
 name: SonarCloud
 on:
-  workflow_dispatch:
-    inputs:
-      branch:
-        description: branch
+ push:
+    branches:
+        - test-1
 jobs:
   build:
     runs-on: ubuntu-16.04
