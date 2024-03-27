@@ -35,4 +35,13 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GIT_HUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: mvn -B -X -e verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=sbdjp_lms-service
-      
+
+      - name: Upload Sonar Results
+        uses: pixee/upload-tool-results-action@v1
+        with:
+          tool: sonar
+          sonar-token: ${{ secrets.SONAR_TOKEN }}
+          sonar-component-key: owner_repo
+          sonar-api-url: https://sonarcloud.io/api
+          
+
