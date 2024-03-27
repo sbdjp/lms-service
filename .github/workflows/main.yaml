@@ -1,9 +1,8 @@
 name: Fix Sonar Issues with Pixeebot
 on:
-  workflow_dispatch:
-    inputs:
-      branch:
-        description: branch
+ push:
+   branches:
+     - pixee-1
         
 jobs:
   build:
