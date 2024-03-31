@@ -15,10 +15,5 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up JDK
-        uses: actions/setup-java@v2
-        with:
-          java-version: '11'  # Adjust to match your Java version
-
-      - name: SonarQube Scanner
+      - name: Sonarcloud Scanner
         run: mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=sbdjp_lms-service -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }}
