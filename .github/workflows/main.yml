@@ -1,10 +1,10 @@
 name: Build Sonarcloude Analysis
 
 on:
-  workflow_dispatch:
-    inputs:
-      branch:
-        description: branch
+  push:
+    branches:
+      - release-5.0.0-pixee
+        
 
 jobs:
   sonarqube_analysis:
